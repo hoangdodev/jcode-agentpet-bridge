@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Install: make install-launchd
+  Verify : launchctl print gui/$(id -u)/io.local.jcode-agentpet-bridge
+  Logs   : tail -F /tmp/jcode-agentpet-bridge.log
+  Stop   : launchctl bootout gui/$(id -u)/io.local.jcode-agentpet-bridge
+
+  BIN_PATH is substituted by the Makefile with the absolute path to the built
+  binary. launchd does not expand $HOME or ~, so we materialize the full path.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>io.local.jcode-agentpet-bridge</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>BIN_PATH</string>
+        <string>-v</string>
+    </array>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>KeepAlive</key>
+    <true/>
+
+    <key>ThrottleInterval</key>
+    <integer>5</integer>
+
+    <key>StandardOutPath</key>
+    <string>/tmp/jcode-agentpet-bridge.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/tmp/jcode-agentpet-bridge.log</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+    </dict>
+</dict>
+</plist>
