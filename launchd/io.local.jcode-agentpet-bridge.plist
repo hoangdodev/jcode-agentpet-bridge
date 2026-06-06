@@ -17,7 +17,6 @@
     <key>ProgramArguments</key>
     <array>
         <string>BIN_PATH</string>
-        <string>-v</string>
     </array>
 
     <key>RunAtLoad</key>
